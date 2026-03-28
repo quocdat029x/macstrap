@@ -1,0 +1,33 @@
+# DevOps Application Registry
+# Add new apps here to extend the installer.
+# Each entry requires:
+#   name: display name
+#   formula: Homebrew formula name (for CLI tools)
+#   cask: Homebrew cask name (for GUI apps)
+#   tap: optional custom tap (e.g., "homebrew/cask-fonts")
+# Use exactly one of: formula or cask per entry.
+
+apps:
+  - name: Git
+    formula: git
+
+  - name: Docker Desktop
+    cask: docker
+
+  - name: Lens
+    cask: lens
+
+  - name: GoLand
+    cask: goland
+
+  - name: WebStorm
+    cask: webstorm
+
+  - name: Obsidian
+    cask: obsidian
+
+  - name: VS Code
+    cask: visual-studio-code
+
+  - name: Synology Drive
+    cask: synology-drive

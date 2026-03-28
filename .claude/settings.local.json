@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx -y @z_ai/mcp-server)",
+      "Bash(python3:*)",
+      "Bash(pip3 install:*)",
+      "Bash(chmod:*)",
+      "Bash(./install.sh --help)",
+      "Bash(./install.sh --dry-run)",
+      "Bash(./install.sh --dry-run git)",
+      "Bash(./install.sh --dry-run nonexistent)",
+      "Bash(echo \"Exit: $?\")",
+      "Bash(shellcheck /Users/quocdat029x/Documents/MacOsInstallation/install.sh /Users/quocdat029x/Documents/MacOsInstallation/lib/*.sh)",
+      "Bash(bash -n /Users/quocdat029x/Documents/MacOsInstallation/install.sh)",
+      "Bash(bash -n /Users/quocdat029x/Documents/MacOsInstallation/lib/log.sh)",
+      "Bash(bash -n /Users/quocdat029x/Documents/MacOsInstallation/lib/brew.sh)",
+      "Bash(./install.sh -c)",
+      "Bash(code -r \"/Users/quocdat029x/Documents/MacOsInstallation\" \"/Users/quocdat029x/Documents/MacOsInstallation/_bmad-output/implementation-artifacts/spec-devops-app-installer.md\")",
+      "Bash(git init:*)",
+      "Bash(git remote:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
+    ]
+  }
+}

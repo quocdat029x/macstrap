@@ -1,0 +1,9 @@
+# BMad artifacts
+_bmad/
+_bmad-output/
+.agent/
+design-artifacts/
+docs/
+
+# macOS
+.DS_Store
