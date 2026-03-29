@@ -8,9 +8,51 @@
 # Use exactly one of: formula or cask per entry.
 
 apps:
+  # ─── CLI Essentials ──────────────────────────────────────────────
   - name: Git
     formula: git
 
+  - name: cURL
+    formula: curl
+
+  - name: Wget
+    formula: wget
+
+  - name: jq
+    formula: jq
+
+  - name: yq
+    formula: yq
+
+  - name: htop
+    formula: htop
+
+  - name: tree
+    formula: tree
+
+  - name: GitHub CLI
+    formula: gh
+
+  - name: fzf
+    formula: fzf
+
+  - name: tmux
+    formula: tmux
+
+  - name: Stern
+    formula: stern
+
+  # ─── Dev Tools ───────────────────────────────────────────────────
+  - name: Go
+    formula: go
+
+  - name: Node.js
+    formula: node
+
+  - name: Pre-commit
+    formula: pre-commit
+
+  # ─── GUI Apps ────────────────────────────────────────────────────
   - name: Docker Desktop
     cask: docker
 
@@ -31,3 +73,25 @@ apps:
 
   - name: Synology Drive
     cask: synology-drive
+
+  - name: Postman
+    cask: postman
+
+  - name: BetterDisplay
+    cask: betterdisplay
+
+  - name: LM Studio
+    cask: lm-studio
+
+  # ─── Network & Security ─────────────────────────────────────────
+  - name: Wireshark
+    cask: wireshark
+
+  - name: Burp Suite
+    cask: burp-suite
+
+  - name: WireGuard Tools
+    formula: wireguard-tools
+
+  - name: WinBox
+    cask: winbox
