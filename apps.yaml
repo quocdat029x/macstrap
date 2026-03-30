@@ -4,94 +4,145 @@
 #   name: display name
 #   formula: Homebrew formula name (for CLI tools)
 #   cask: Homebrew cask name (for GUI apps)
+#   winget: Winget package ID (for Windows, optional)
 #   tap: optional custom tap (e.g., "homebrew/cask-fonts")
+#   platforms: optional platform allowlist (e.g., [macos, linux])
 # Use exactly one of: formula or cask per entry.
+# When platforms is absent, the app is available on all platforms.
 
 apps:
   # ─── CLI Essentials ──────────────────────────────────────────────
   - name: Git
     formula: git
+    winget: Git.Git
 
   - name: cURL
     formula: curl
+    winget: cURL.cURL
 
   - name: Wget
     formula: wget
+    platforms: [macos, linux]
 
   - name: jq
     formula: jq
+    winget: jqlang.jq
 
   - name: yq
     formula: yq
+    winget: MikeFarah.yq
 
   - name: htop
     formula: htop
+    platforms: [macos, linux]
 
   - name: tree
     formula: tree
+    winget: tucnak.tree
 
   - name: GitHub CLI
     formula: gh
+    winget: GitHub.cli
 
   - name: fzf
     formula: fzf
+    winget: junegunn.fzf
 
   - name: tmux
     formula: tmux
+    platforms: [macos, linux]
 
   - name: Stern
     formula: stern
+    platforms: [macos, linux]
+
+  - name: uv
+    formula: uv
+    winget: astral-sh.uv
+
+  - name: AWS CLI
+    formula: awscli
+    winget: Amazon.AWSCLI
+
+  - name: Azure CLI
+    formula: azure-cli
+    winget: Microsoft.AzureCLI
 
   # ─── Dev Tools ───────────────────────────────────────────────────
   - name: Go
     formula: go
+    winget: GoLang.Go
 
   - name: Node.js
     formula: node
+    winget: OpenJS.NodeJS.LTS
 
   - name: Pre-commit
     formula: pre-commit
+    winget: pre-commit.pre-commit
+
+  - name: Terraform
+    formula: terraform
+    winget: Hashicorp.Terraform
+
+  - name: OpenTofu
+    formula: opentofu
+    winget: OpenTofu.OpenTofu
 
   # ─── GUI Apps ────────────────────────────────────────────────────
   - name: Docker Desktop
     cask: docker
+    winget: Docker.DockerDesktop
 
   - name: Lens
     cask: lens
+    winget: Mirantis.Lens
 
   - name: GoLand
     cask: goland
+    winget: JetBrains.GoLand
 
   - name: WebStorm
     cask: webstorm
+    winget: JetBrains.WebStorm
 
   - name: Obsidian
     cask: obsidian
+    winget: Obsidian.Obsidian
 
   - name: VS Code
     cask: visual-studio-code
+    winget: Microsoft.VisualStudioCode
 
   - name: Synology Drive
     cask: synology-drive
+    platforms: [macos]
 
   - name: Postman
     cask: postman
+    winget: Postman.Postman
 
   - name: BetterDisplay
     cask: betterdisplay
+    platforms: [macos]
 
   - name: LM Studio
     cask: lm-studio
+    winget: ElementLabs.LMStudio
 
   # ─── Network & Security ─────────────────────────────────────────
   - name: Wireshark
     cask: wireshark
+    winget: WiresharkFoundation.Wireshark
 
   - name: Burp Suite
     cask: burp-suite
+    winget: PortSwigger.BurpSuite.Community
 
   - name: WireGuard Tools
     formula: wireguard-tools
+    platforms: [macos, linux]
 
   - name: WinBox
     cask: winbox
+    winget: MikroTik.WinBox

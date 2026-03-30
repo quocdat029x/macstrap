@@ -26,6 +26,7 @@ APP_NAMES=()
 APP_BREW_NAMES=()
 APP_TYPES=()      # "formula" or "cask"
 APP_TAPS=()
+APP_PLATFORMS=()  # comma-separated platforms or empty for all
 
 # ─── Parse arguments ────────────────────────────────────────────────
 usage() {
@@ -96,8 +97,9 @@ parse_registry() {
     APP_BREW_NAMES=()
     APP_TYPES=()
     APP_TAPS=()
+    APP_PLATFORMS=()
 
-    local in_apps=false current_name="" current_formula="" current_cask="" current_tap=""
+    local in_apps=false current_name="" current_formula="" current_cask="" current_tap="" current_platforms=""
 
     while IFS= read -r line; do
         # Strip Windows carriage returns
@@ -121,18 +123,23 @@ parse_registry() {
             if [[ "$line" =~ ^[[:space:]]+-[[:space:]]name:[[:space:]]*(.*) ]]; then
                 # Flush previous entry
                 if [ -n "$current_name" ]; then
-                    flush_entry "$current_name" "$current_formula" "$current_cask" "$current_tap"
+                    flush_entry "$current_name" "$current_formula" "$current_cask" "$current_tap" "$current_platforms"
                 fi
                 current_name="${BASH_REMATCH[1]}"
                 current_formula=""
                 current_cask=""
                 current_tap=""
+                current_platforms=""
             elif [[ "$line" =~ ^[[:space:]]+formula:[[:space:]]*(.*) ]]; then
                 current_formula="${BASH_REMATCH[1]}"
             elif [[ "$line" =~ ^[[:space:]]+cask:[[:space:]]*(.*) ]]; then
                 current_cask="${BASH_REMATCH[1]}"
             elif [[ "$line" =~ ^[[:space:]]+tap:[[:space:]]*(.*) ]]; then
                 current_tap="${BASH_REMATCH[1]}"
+            elif [[ "$line" =~ ^[[:space:]]+platforms:[[:space:]]*\[(.+)\] ]]; then
+                current_platforms="${BASH_REMATCH[1]}"
+            elif [[ "$line" =~ ^[[:space:]]+winget:[[:space:]]*(.*) ]]; then
+                : # winget field ignored on macOS
             elif [[ ! "$line" =~ ^[[:space:]] ]]; then
                 # No longer indented — end of apps list
                 in_apps=false
@@ -142,23 +149,36 @@ parse_registry() {
 
     # Flush last entry
     if [ -n "$current_name" ]; then
-        flush_entry "$current_name" "$current_formula" "$current_cask" "$current_tap"
+        flush_entry "$current_name" "$current_formula" "$current_cask" "$current_tap" "$current_platforms"
     fi
 }
 
 flush_entry() {
-    local name="$1" formula="$2" cask="$3" tap="$4"
+    local name="$1" formula="$2" cask="$3" tap="$4" platforms="$5"
+
+    # Platform filter: skip if platforms is set and doesn't include current OS
+    if [ -n "$platforms" ]; then
+        local current_os="macos"
+        if [[ "$(uname -s)" == "Linux" ]]; then
+            current_os="linux"
+        fi
+        if [[ ",$platforms," != *",$current_os,"* ]]; then
+            return 0
+        fi
+    fi
 
     if [ -n "$formula" ]; then
         APP_NAMES+=("$name")
         APP_BREW_NAMES+=("$formula")
         APP_TYPES+=("formula")
         APP_TAPS+=("${tap:-}")
+        APP_PLATFORMS+=("${platforms:-}")
     elif [ -n "$cask" ]; then
         APP_NAMES+=("$name")
         APP_BREW_NAMES+=("$cask")
         APP_TYPES+=("cask")
         APP_TAPS+=("${tap:-}")
+        APP_PLATFORMS+=("${platforms:-}")
     fi
 }
 

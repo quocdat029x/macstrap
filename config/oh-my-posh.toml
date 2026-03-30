@@ -1,0 +1,78 @@
+# Oh My Posh Prompt Configuration (Windows)
+# Minimal, clean prompt matching the macOS Starship config
+
+"$schema" = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json"
+
+[palette]
+cyan = "#00FFFF"
+green = "#00FF00"
+yellow = "#FFFF00"
+red = "#FF0000"
+purple = "#A020F0"
+
+[[blocks]]
+type = "prompt"
+alignment = "left"
+newline = false
+
+[[blocks.segments]]
+type = "path"
+style = "plain"
+foreground = "p:cyan"
+template = "{{ .Path }} "
+
+[blocks.segments.properties]
+style = "mixed"
+max_depth = 3
+mixed_threshold = 4
+
+[[blocks.segments]]
+type = "git"
+style = "plain"
+foreground = "p:purple"
+foreground_templates = [
+    '{{ if .Working.Changed }}p:red{{ end }}',
+]
+template = " {{ .HEAD }}{{ if .BranchStatus }} {{ .BranchStatus }}{{ end }} "
+
+[[blocks.segments]]
+type = "go"
+style = "plain"
+foreground = "p:cyan"
+template = " {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} "
+
+[[blocks.segments]]
+type = "node"
+style = "plain"
+foreground = "p:green"
+template = " {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} "
+
+[[blocks.segments]]
+type = "python"
+style = "plain"
+foreground = "p:yellow"
+template = " {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} "
+
+[[blocks.segments]]
+type = "executiontime"
+style = "plain"
+foreground = "p:yellow"
+template = "{{ .FormattedMs }} "
+
+[blocks.segments.properties]
+threshold = 2000
+style = "roundrock"
+
+[[blocks]]
+type = "prompt"
+alignment = "left"
+newline = true
+
+[[blocks.segments]]
+type = "text"
+style = "plain"
+foreground_templates = [
+    '{{ if gt .Code 0 }}p:red{{ end }}',
+    '{{ if eq .Code 0 }}p:green{{ end }}',
+]
+template = ">"
