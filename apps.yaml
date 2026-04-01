@@ -64,6 +64,10 @@ apps:
     formula: awscli
     winget: Amazon.AWSCLI
 
+  - name: AWS Session Manager Plugin
+    cask: session-manager-plugin
+    winget: Amazon.SessionManagerPlugin
+
   - name: Azure CLI
     formula: azure-cli
     winget: Microsoft.AzureCLI
@@ -124,6 +128,10 @@ apps:
 
   - name: BetterDisplay
     cask: betterdisplay
+    platforms: [macos]
+
+  - name: Karabiner-Elements
+    cask: karabiner-elements
     platforms: [macos]
 
   - name: LM Studio
